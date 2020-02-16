@@ -1,0 +1,19 @@
+#container{
+    margin: 10% 30%;
+}
+
+.block{
+    color: black;
+    background-color: bisque;
+    border-radius: 15px;
+    border: 2px solid green;
+}
+
+.block:focus {
+    outline: 0;
+}
+
+.block-animation {
+    background-color: slateblue;
+    transition: all ease-in-out 0.3ms;
+}

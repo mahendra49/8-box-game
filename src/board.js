@@ -1,15 +1,28 @@
 import React, { Component } from "react";
+import "./board.css";
 
-class Table extends Component {
+class Board extends Component {
+  animateBlock = val => {
+    let element = document.getElementById(val);
+    element.classList.add("block-animation");
+    setInterval(() => {
+      element.classList.remove("block-animation");
+    }, 500);
+  };
+
   addRow = (start, end) => {
     let row = [];
     for (let i = start; i <= end; i++)
       row.push(
         <td>
           <button
+            className="block"
             style={{ width: 100, height: 100 }}
             id={i}
-            onClick={e => this.props.handler(e)}
+            onClick={e => {
+              this.props.handler(e);
+              this.animateBlock(e.target.id);
+            }}
           >
             {this.props.value[i - 1]}
           </button>
@@ -19,11 +32,9 @@ class Table extends Component {
   };
 
   render() {
-    // if make row is in render then everytime we are registering a function:
-
     return (
-      <div align="center">
-        <table style={{ marginTop: 50 }}>
+      <div id="container">
+        <table className="board">
           <tbody>
             {this.addRow(1, 3)}
             {this.addRow(4, 6)}
@@ -35,4 +46,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default Board;

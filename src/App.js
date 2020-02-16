@@ -1,29 +1,21 @@
 import React, { Component } from "react";
-import Table from "./table";
-
-const START = 1;
-const END = 9;
+import Board from "./board";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      arr: [],
-      message: " ",
       grid: []
     };
-    // No need since arrow function don't need binding
   }
 
   componentWillMount() {
-    let grid = [1, 2, 3, 4, 5, 6, 7, 8, ""];
-    grid = shuffle(grid);
-    this.setState({ grid, arr: grid });
+    let grid = shuffle([1, 2, 3, 4, 5, 6, 7, 8, ""]);
+    this.setState({ grid });
   }
 
   handler1 = e => {
-    var sam = e.target.id;
-    sam = parseInt(sam, 10);
+    const sam = parseInt(e.target.id, 10);
     const neightbours = getNeighbours(sam);
     let emptyBox = neightbours.find(neightbour => isElementEmpty(neightbour));
     if (emptyBox) {
@@ -32,102 +24,10 @@ class App extends Component {
     this.winChecker();
   };
 
-  /* handler = e => {
-    var sam = e.target.id;
-    sam = parseInt(sam, 10);
-
-    if (sam === 1 || sam === 3) {
-      if (document.getElementById(2).innerHTML === "") {
-        document.getElementById(2).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(3 + sam).innerHTML === "") {
-        document.getElementById(3 + sam).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-    }
-
-    if (sam === 7 || sam === 9) {
-      if (document.getElementById(8).innerHTML === "") {
-        document.getElementById(8).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(sam - 3).innerHTML === "") {
-        document.getElementById(sam - 3).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-    }
-
-    if (sam === 5) {
-      if (document.getElementById(sam - 1).innerHTML === "") {
-        document.getElementById(sam - 1).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(sam + 1).innerHTML === "") {
-        document.getElementById(sam + 1).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(sam - 3).innerHTML === "") {
-        document.getElementById(sam - 3).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(sam + 3).innerHTML === "") {
-        document.getElementById(sam + 3).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-    }
-
-    if (sam === 2 || sam === 8) {
-      if (document.getElementById(sam - 1).innerHTML === "") {
-        document.getElementById(sam - 1).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(sam + 1).innerHTML === "") {
-        document.getElementById(sam + 1).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (sam === 8) {
-        if (document.getElementById(sam - 3).innerHTML === "") {
-          document.getElementById(sam - 3).innerHTML = e.target.innerHTML;
-          e.target.innerHTML = "";
-        }
-      } else {
-        if (document.getElementById(sam + 3).innerHTML === "") {
-          document.getElementById(sam + 3).innerHTML = e.target.innerHTML;
-          e.target.innerHTML = "";
-        }
-      }
-    }
-
-    if (sam === 4 || sam === 6) {
-      if (document.getElementById(sam - 3).innerHTML === "") {
-        document.getElementById(sam - 3).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (document.getElementById(sam + 3).innerHTML === "") {
-        document.getElementById(sam + 3).innerHTML = e.target.innerHTML;
-        e.target.innerHTML = "";
-      }
-      if (sam === 4) {
-        if (document.getElementById(sam + 1).innerHTML === "") {
-          document.getElementById(sam + 1).innerHTML = e.target.innerHTML;
-          e.target.innerHTML = "";
-        }
-      } else {
-        if (document.getElementById(sam - 1).innerHTML === "") {
-          document.getElementById(sam - 1).innerHTML = e.target.innerHTML;
-          e.target.innerHTML = "";
-        }
-      }
-    }
-
-    this.winChecker();
-  }; */
-
   winChecker = () => {
     let count = 0;
     for (let i = 1; i <= 8; i++) {
-      if (i == document.getElementById(i).innerHTML) count++;
+      if (i === document.getElementById(i).innerHTML) count++;
       else break;
     }
     if (count === 8) this.setState({ message: "Winner!!!" });
@@ -136,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Table value={this.state.grid} handler={this.handler1} />
+        <Board value={this.state.grid} handler={this.handler1} />
         <h1 className="text-center">{this.state.message}</h1>
       </div>
     );
