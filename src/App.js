@@ -5,7 +5,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      grid: []
+      grid: [],
+      message: ""
     };
   }
 
@@ -31,13 +32,14 @@ class App extends Component {
       else break;
     }
     if (count === 8) this.setState({ message: "Winner!!!" });
+    console.log(this.state);
   };
 
   render() {
     return (
       <div>
-        <Board value={this.state.grid} handler={this.handler1} />
-        <h1 className="text-center">{this.state.message}</h1>
+        <Board grid={this.state.grid} handler={this.handler1} />
+        <h1>{this.state.message}</h1>
       </div>
     );
   }

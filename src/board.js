@@ -14,8 +14,9 @@ class Board extends Component {
     let row = [];
     for (let i = start; i <= end; i++)
       row.push(
-        <td>
+        <td key={i}>
           <button
+            key={i}
             className="block"
             style={{ width: 100, height: 100 }}
             id={i}
@@ -24,7 +25,7 @@ class Board extends Component {
               this.animateBlock(e.target.id);
             }}
           >
-            {this.props.value[i - 1]}
+            {this.props.grid[i - 1]}
           </button>
         </td>
       );
