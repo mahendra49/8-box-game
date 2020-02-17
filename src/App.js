@@ -28,7 +28,7 @@ class App extends Component {
   winChecker = () => {
     let count = 0;
     for (let i = 1; i <= 8; i++) {
-      if (i === document.getElementById(i).innerHTML) count++;
+      if (i == document.getElementById(i).innerHTML) count++;
       else break;
     }
     if (count === 8) this.setState({ message: "Winner!!!" });
